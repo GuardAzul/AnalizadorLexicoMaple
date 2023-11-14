@@ -2,14 +2,23 @@
 resultado_lexema = []
 #aqui declarar todos los conjuntos
 #Aqui estuvo castro
-# Palabras reservadas
-reservadas = [
-    'include', 'using', 'namespace', 'std', 'cout', 'cin', 'get', 'endl',
-    'else', 'if', 'return', 'void', 'while', 'for'
-]
-
 #operadores de asignacion
-opAsignacion = []
+opAritmeticos = ['-','+','!','*','^','/', 'mod']
+opLogicos =['and', 'or', 'not', 'xor', 'implies', 'equivalent']
+opRelacionales = ['=', '<>', '<', '<=', '>', '>=']
+opAsignacion = [':=', '*=', '/=', '+=', '-=', '->']
+simbolosAbrir = ['(', '[', '{', "'", '"']
+simbolosCerrar = [')', ']', '}', "'", '"']
+terminales = [';', ':']
+sepadores = [';' r"\n"]
+palabrasBucle = ['for', 'while', 'do', 'end do', 'od']
+palabrasDecision = ['if', 'elif', 'fi', 'case', 'end case']
+palabrasClases = ['module', 'end module']
+letras = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','m','M','n','N','ñ','Ñ','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z']
+numeros = [0, 1,2,3,4,5,6,7,8,9]
+simbolos = ['$']
+
+token = opAritmeticos 
 
 def analizador_lexico(data):
     i = 0
@@ -24,7 +33,7 @@ def analizador_lexico(data):
             while i < n and (data[i].isalnum() or data[i] == '_'):
                 lexema += data[i]
                 i += 1
-            if lexema in reservadas:
+            if lexema in token:
                 resultado_lexema.append(f'Palabra Reservada: {lexema}')
             else:
                 resultado_lexema.append(f'Identificador: {lexema}')
