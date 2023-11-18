@@ -90,12 +90,14 @@ token = (
 )
 
 
+# Funcion para analizar el input
 def analizador_lexico(data):
-    palabras = data.split()
+    palabras = data.split() # Convierte el input (data) en palabras
     cont = 1
-
     for palabra in palabras:
+        # Se valida que la palabra este en el diccionario de tokens
         if palabra in token:
+            # Se comienza a validar en que diccionario está la palabra y se agrega a la lista resultado_lexema
             if palabra in opAritmeticos:
                 resultado_lexema.append(f"Operador Aritmetico: {palabra}")
             elif palabra in opLogicos:
@@ -126,33 +128,34 @@ def analizador_lexico(data):
                 resultado_lexema.append(f"Identificador: {palabra}")
         else:
             flagError = False
-            if palabra[0] in letras:
+            if palabra[0] in letras:# Se valida que el primer caracter de la palabra sea una letra, para comenzar a validar si es un identificador
                 for caracter in palabra:
+                    # De ser el primer caracter una letra, se valida con este for los demás caracteres para verificar que cumpla con los token
                     if (
                         caracter not in numeros
                         and caracter not in letras
                         and caracter not in simbolos
                     ):
-                        flagError = True
+                        flagError = True # Si encuentra un caracter que no pertenece a los token, marca la flag como true
                         break
             else:
-                flagError = True
+                flagError = True # Si el primer caracter no es una letra marca la flag como true
             if flagError:
-                resultado_lexema.append(f"Error: {palabra}")
+                resultado_lexema.append(f"Error: {palabra}") # Agrega el error al resultado_lexema
             else:
-                resultado_lexema.append(f"Identificador: {palabra}")
+                resultado_lexema.append(f"Identificador: {palabra}") # Agrega la palabra como un identificador si todos sus caracteres son token validos
         if cont < len(palabras):
-            resultado_lexema.append(f" => ")
+            resultado_lexema.append(f" => ") # Imprime un separador luego de validar que el contador sea menor a la longitud del input
         cont += 1
-    if palabras[-1] not in terminales:
+    if palabras[-1] not in terminales: # Imprime un error si no se termina con un simbolo terminal
         resultado_lexema.append(f" => Error: Falta el terminal al final de la línea ")
 
-    return resultado_lexema
+    return resultado_lexema # Retorna el resultado 
 
 
 if __name__ == "__main__":
     while True:
-        data = input("Ingrese: ")
+        data = input("Ingrese el código: ") # Pide el input
         resultado_lexema = []  # Reiniciar la lista en cada iteración
         analizador_lexico(data)
-        print("".join(resultado_lexema))
+        print("".join(resultado_lexema)) # Imprime la lista resultado_lexema como un String
