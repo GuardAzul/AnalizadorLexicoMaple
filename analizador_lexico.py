@@ -92,40 +92,41 @@ token = (
 
 def analizador_lexico(data):
     palabras = data.split()
-    
+    cont = 1
+
     for palabra in palabras:
         if palabra in token:
             if palabra in opAritmeticos:
-                resultado_lexema.append(f"Operador Aritmetico: {palabra} => ")
+                resultado_lexema.append(f"Operador Aritmetico: {palabra}")
             elif palabra in opLogicos:
-                resultado_lexema.append(f"Operador Logico: {palabra} => ")
+                resultado_lexema.append(f"Operador Logico: {palabra}")
             elif palabra in opRelacionales:
-                resultado_lexema.append(f"Operador Relacional: {palabra} => ")
+                resultado_lexema.append(f"Operador Relacional: {palabra}")
             elif palabra in opAsignacion:
-                resultado_lexema.append(f"Operador de Asignacion: {palabra} => ")
+                resultado_lexema.append(f"Operador de Asignacion: {palabra}")
             elif palabra in simbolosAbrir:
-                resultado_lexema.append(f"Simbolo de Apertura: {palabra} => ")
+                resultado_lexema.append(f"Simbolo de Apertura: {palabra}")
             elif palabra in simbolosCerrar:
-                resultado_lexema.append(f"Simbolo de Cierre: {palabra} => ")
+                resultado_lexema.append(f"Simbolo de Cierre: {palabra}")
             elif palabra in terminales:
-                resultado_lexema.append(f"Terminal: {palabra} => ")
+                resultado_lexema.append(f"Terminal: {palabra}")
             elif palabra in separadores:
-                resultado_lexema.append(f"Separador: {palabra} => ")
+                resultado_lexema.append(f"Separador: {palabra}")
             elif palabra in palabrasBucle:
-                resultado_lexema.append(f"Palabra de Bucle: {palabra} => ")
+                resultado_lexema.append(f"Palabra de Bucle: {palabra}")
             elif palabra in palabrasDecision:
-                resultado_lexema.append(f"Palabra de Decision: {palabra} => ")
+                resultado_lexema.append(f"Palabra de Decision: {palabra}")
             elif palabra in palabrasClases:
-                resultado_lexema.append(f"Palabra de Clase: {palabra} => ")
+                resultado_lexema.append(f"Palabra de Clase: {palabra}")
             elif palabra in numeros:
-                resultado_lexema.append(f"Numero: {palabra} => ")
+                resultado_lexema.append(f"Numero: {palabra}")
             elif palabra in simbolos:
-                resultado_lexema.append(f"Simbolo: {palabra} => ")
+                resultado_lexema.append(f"Simbolo: {palabra}")
             else:
-                resultado_lexema.append(f"Identificador: {palabra} => ")
+                resultado_lexema.append(f"Identificador: {palabra}")
         else:
             flagError = False
-            if(palabra[0] in letras):
+            if palabra[0] in letras:
                 for caracter in palabra:
                     if (
                         caracter not in numeros
@@ -137,12 +138,14 @@ def analizador_lexico(data):
             else:
                 flagError = True
             if flagError:
-                resultado_lexema.append(f"Error: {palabra} => ")
+                resultado_lexema.append(f"Error: {palabra}")
             else:
-                resultado_lexema.append(f"Identificador: {palabra} => ")
-
+                resultado_lexema.append(f"Identificador: {palabra}")
+        if cont < len(palabras):
+            resultado_lexema.append(f" => ")
+        cont += 1
     if palabras[-1] not in terminales:
-        resultado_lexema.append(f"Error: Falta el terminal al final de la línea => ")
+        resultado_lexema.append(f" => Error: Falta el terminal al final de la línea ")
 
     return resultado_lexema
 
